@@ -1,8 +1,8 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MVCAssignments.Models;
+using MVCAssignmentTwo.Models;
+using System.Diagnostics;
 
-namespace MVCAssignments.Controllers
+namespace MVCAssignmentTwo.Controllers
 {
     public class HomeController : Controller
     {

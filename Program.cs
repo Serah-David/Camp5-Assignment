@@ -1,7 +1,7 @@
-﻿using MVCAssignmentsOne.Repository;
-using MVCAssignmentsOne.Service;
+using MVCAssignmentTwo.Repository;
+using MVCAssignmentTwo.Service;
 
-namespace MVCAssignments
+namespace MVCAssignmentTwo
 {
     public class Program
     {
@@ -9,23 +9,19 @@ namespace MVCAssignments
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container
+            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            //  Register your services (Dependency Injection)
-            builder.Services.AddScoped<IPatientService, PatientServiceImpl>();
-            builder.Services.AddScoped<IPatientRepository, PatientRepositoryImpl>();
-
-            // Read connection string from appsettings.json
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+            builder.Services.AddScoped<IProfessorRepository, ProfessorRepositoryImpl>();
+            builder.Services.AddScoped<IProfessorService, ProfessorServiceImpl>();
 
             var app = builder.Build();
 
-            // ⚙️ Configure the HTTP request pipeline
+            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -33,11 +29,12 @@ namespace MVCAssignments
             app.UseStaticFiles();
 
             app.UseRouting();
+
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Patient}/{action=Index}/{id?}"
+                pattern: "{controller=Professor}/{action=Index}/{id?}"
             );
 
             app.Run();
