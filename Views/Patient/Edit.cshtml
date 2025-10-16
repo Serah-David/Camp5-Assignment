@@ -1,0 +1,85 @@
+﻿@model MVCAssignmentsOne.Models.Patient
+@{
+    ViewBag.Title = "Edit Patient";
+}
+
+<div class="container mt-4">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Edit Patient</h2>
+
+        <form asp-action="Edit" method="post">
+            <!-- Hidden ID -->
+            <div class="form-group mb-3">
+                <label asp-for="PatientId" class="form-label"></label>
+                <input asp-for="PatientId" class="form-control" readonly />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="RegistrationNo" class="form-label"></label>
+                <input asp-for="RegistrationNo" class="form-control" readonly />
+                <span asp-validation-for="RegistrationNo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="PatientName" class="form-label"></label>
+                <input asp-for="PatientName" class="form-control" />
+                <span asp-validation-for="PatientName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Dob" class="form-label"></label>
+                <input asp-for="Dob" type="date" class="form-control" />
+                <span asp-validation-for="Dob" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label">Gender</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input asp-for="Gender" class="form-check-input" type="radio" value="Male"
+                               checked="@(Model.Gender == "Male")" id="genderMale" />
+                        <label class="form-check-label" for="genderMale">Male</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input asp-for="Gender" class="form-check-input" type="radio" value="Female"
+                               checked="@(Model.Gender == "Female")" id="genderFemale" />
+                        <label class="form-check-label" for="genderFemale">Female</label>
+                    </div>
+                </div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label asp-for="Address" class="form-label"></label>
+                <textarea asp-for="Address" class="form-control"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="PhoneNo" class="form-label"></label>
+                <input asp-for="PhoneNo" class="form-control" />
+                <span asp-validation-for="PhoneNo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MembershipId" class="form-label"></label>
+                <select asp-for="MembershipId" asp-items="ViewBag.Memberships" class="form-select">
+                    <option value="">-- Select Membership --</option>
+                </select>
+                <span asp-validation-for="MembershipId" class="text-danger"></span>
+            </div>
+
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary px-4">Update</button>
+                <a asp-action="Index" class="btn btn-secondary px-4 ms-2">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
