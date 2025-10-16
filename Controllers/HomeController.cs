@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using MVCAssignmentTwo.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using MVCAssignmentThree.Models;
 
-namespace MVCAssignmentTwo.Controllers
+namespace MVCAssignmentThree.Controllers
 {
     public class HomeController : Controller
     {
@@ -23,10 +23,24 @@ namespace MVCAssignmentTwo.Controllers
             return View();
         }
 
+        public IActionResult AdminDashboard(string name) =>
+            Content($"Welcome {name}, you are logged in as Administrator!");
+
+        public IActionResult CoordinatorDashboard(string name) =>
+            Content($"Welcome {name}, you are logged in as Coordinator!");
+
+        public IActionResult ReceptionistDashboard(string name) =>
+            Content($"Welcome {name}, you are logged in as Receptionist!");
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(
+                new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                }
+            );
         }
     }
 }

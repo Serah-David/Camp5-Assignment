@@ -1,0 +1,62 @@
+﻿@model User
+@{
+    ViewBag.Title = "User Registration";
+}
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+
+<div class="container mt-4">
+    <div class="card shadow p-4 col-md-6 mx-auto">
+        <h3 class="text-center text-primary mb-3">User Registration</h3>
+
+        <form id="CreateEmployeeForm" asp-action="Register" asp-controller="User" method="post">
+
+            <div class="mb-3">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="RoleId">Select Role</label>
+                <select asp-for="RoleId" asp-items="@(new SelectList(ViewBag.Roles, "RoleId", "RoleName"))" class="form-control">
+                    <option value="">-- Select Role --</option>
+                </select>
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+
+               
+
+            </div>
+
+            <input type="submit" value="Register" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @if (ViewBag.AlertMessage != null)
+    {
+        <script>
+            alert('@ViewBag.AlertMessage');
+            window.location.href = '@Url.Action("Login", "User")';
+        </script>
+    }
+}
+
+
